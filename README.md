@@ -1,14 +1,10 @@
-# num
+# num-iter
 
-[![](https://travis-ci.org/rust-num/num.svg)](https://travis-ci.org/rust-num/num)
+[![crate](https://img.shields.io/crates/v/num-iter.svg)](https://crates.io/crates/num-iter)
+[![documentation](https://docs.rs/num-iter/badge.svg)](https://docs.rs/num-iter)
+[![Travis status](https://travis-ci.org/rust-num/num-iter.svg?branch=master)](https://travis-ci.org/rust-num/num-iter)
 
-A collection of numeric types and traits for Rust.
-
-This includes new types for big integers, rationals, and complex numbers,
-new traits for generic programming on numeric properties like `Integer`,
-and generic range iterators.
-
-[Documentation](http://rust-num.github.io/num)
+Generic `Range` iterators for Rust.
 
 ## Usage
 
@@ -16,16 +12,15 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-num = "0.1"
+num-iter = "0.1"
 ```
 
 and this to your crate root:
 
 ```rust
-extern crate num;
+extern crate num_iter;
 ```
 
 ## Compatibility
 
-Most of the `num` crates are tested for rustc 1.8 and greater.
-The exception is `num-derive` which requires at least rustc 1.15.
+The `num-iter` crate is tested for rustc 1.8 and greater.
