@@ -9,6 +9,10 @@
 // except according to those terms.
 
 //! External iterators for generic mathematics
+//!
+//! ## Compatibility
+//!
+//! The `num-iter` crate is tested for rustc 1.8 and greater.
 
 #![doc(html_root_url = "https://docs.rs/num-iter/0.1")]
 
