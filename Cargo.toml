@@ -11,6 +11,9 @@ name = "num-iter"
 version = "0.1.35"
 readme = "README.md"
 
+[package.metadata.docs.rs]
+all-features = true
+
 [dependencies]
 
 [dependencies.num-integer]
