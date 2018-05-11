@@ -57,7 +57,7 @@ pub fn range<A>(start: A, stop: A) -> Range<A>
 }
 
 #[inline]
-#[cfg(feature = "i128")]
+#[cfg(has_i128)]
 fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
     match x.to_u128() {
         None => match x.to_i128() {
@@ -69,7 +69,7 @@ fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
 }
 
 #[inline]
-#[cfg(not(feature = "i128"))]
+#[cfg(not(has_i128))]
 fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
     match x.to_u64() {
         None => match x.to_i64() {
@@ -362,7 +362,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(feature = "i128")]
+    #[cfg(has_i128)]
     fn test_range_128() {
         use core::{i128, u128};
 
@@ -402,7 +402,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(feature = "i128")]
+    #[cfg(has_i128)]
     fn test_range_inclusive_128() {
         use core::i128;
 
@@ -443,7 +443,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(feature = "i128")]
+    #[cfg(has_i128)]
     fn test_range_step_128() {
         use core::u128::MAX as UMAX;
 
@@ -478,7 +478,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(feature = "i128")]
+    #[cfg(has_i128)]
     fn test_range_step_inclusive_128() {
         use core::u128::MAX as UMAX;
 
