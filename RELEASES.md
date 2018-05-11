@@ -1,3 +1,13 @@
+# Release 0.1.37
+
+- [Support for 128-bit integers is now automatically detected and enabled.][5]
+  Setting the `i128` crate feature now causes the build script to panic if such
+  support is not detected.
+
+**Contributors**: @cuviper
+
+[5]: https://github.com/rust-num/num-iter/pull/5
+
 # Release 0.1.36
 
 - [The iterators are now implemented for `i128` and `u128`][7] starting with
