@@ -17,13 +17,14 @@ all-features = true
 [dependencies]
 
 [dependencies.num-integer]
-version = "0.1.36"
+version = "0.1.37"
 default-features = false
 
 [dependencies.num-traits]
-version = "0.2.0"
+version = "0.2.3"
 default-features = false
 
 [features]
 default = ["std"]
-std = []
+i128 = ["num-integer/i128", "num-traits/i128"]
+std = ["num-integer/std", "num-traits/std"]
