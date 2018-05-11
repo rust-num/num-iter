@@ -1,3 +1,12 @@
+# Release 0.1.36
+
+- [The iterators are now implemented for `i128` and `u128`][7] starting with
+  Rust 1.26, enabled by the new `i128` crate feature.
+
+**Contributors**: @cuviper
+
+[4]: https://github.com/rust-num/num-iter/pull/4
+
 # Release 0.1.35
 
 - [num-iter now has its own source repository][num-356] at [rust-num/num-iter][home].
