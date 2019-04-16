@@ -402,14 +402,10 @@ mod tests {
         use core::{i128, u128};
 
         assert!(super::range(0i128, 5).eq([0, 1, 2, 3, 4].iter().cloned()));
-        assert!(
-            super::range(-10i128, -1).eq([-10, -9, -8, -7, -6, -5, -4, -3, -2].iter().cloned())
-        );
-        assert!(
-            super::range(0u128, 5)
-                .rev()
-                .eq([4, 3, 2, 1, 0].iter().cloned())
-        );
+        assert!(super::range(-10i128, -1).eq([-10, -9, -8, -7, -6, -5, -4, -3, -2].iter().cloned()));
+        assert!(super::range(0u128, 5)
+            .rev()
+            .eq([4, 3, 2, 1, 0].iter().cloned()));
 
         assert_eq!(
             super::range(i128::MIN, i128::MIN + 1).size_hint(),
@@ -442,11 +438,9 @@ mod tests {
     #[test]
     fn test_range_inclusive() {
         assert!(super::range_inclusive(0, 5).eq([0, 1, 2, 3, 4, 5].iter().cloned()));
-        assert!(
-            super::range_inclusive(0, 5)
-                .rev()
-                .eq([5, 4, 3, 2, 1, 0].iter().cloned())
-        );
+        assert!(super::range_inclusive(0, 5)
+            .rev()
+            .eq([5, 4, 3, 2, 1, 0].iter().cloned()));
         assert_eq!(super::range_inclusive(200, -5).count(), 0);
         assert_eq!(super::range_inclusive(200, -5).rev().count(), 0);
         assert!(super::range_inclusive(200, 200).eq(iter::once(200)));
@@ -467,19 +461,15 @@ mod tests {
         use core::i128;
 
         assert!(super::range_inclusive(0u128, 5).eq([0, 1, 2, 3, 4, 5].iter().cloned()));
-        assert!(
-            super::range_inclusive(0u128, 5)
-                .rev()
-                .eq([5, 4, 3, 2, 1, 0].iter().cloned())
-        );
+        assert!(super::range_inclusive(0u128, 5)
+            .rev()
+            .eq([5, 4, 3, 2, 1, 0].iter().cloned()));
         assert_eq!(super::range_inclusive(200i128, -5).count(), 0);
         assert_eq!(super::range_inclusive(200i128, -5).rev().count(), 0);
         assert!(super::range_inclusive(200u128, 200).eq(iter::once(200)));
-        assert!(
-            super::range_inclusive(200u128, 200)
-                .rev()
-                .eq(iter::once(200))
-        );
+        assert!(super::range_inclusive(200u128, 200)
+            .rev()
+            .eq(iter::once(200)));
         assert_eq!(
             super::range_inclusive(isize::MIN as i128, isize::MAX as i128 - 1).size_hint(),
             (usize::MAX, Some(usize::MAX))
@@ -539,10 +529,8 @@ mod tests {
         assert!(super::range_step_inclusive(0u128, 20, 5).eq([0, 5, 10, 15, 20].iter().cloned()));
         assert!(super::range_step_inclusive(20i128, 0, -5).eq([20, 15, 10, 5, 0].iter().cloned()));
         assert!(super::range_step_inclusive(20i128, 0, -6).eq([20, 14, 8, 2].iter().cloned()));
-        assert!(
-            super::range_step_inclusive(UMAX - 55, UMAX, 50)
-                .eq([UMAX - 55, UMAX - 5].iter().cloned())
-        );
+        assert!(super::range_step_inclusive(UMAX - 55, UMAX, 50)
+            .eq([UMAX - 55, UMAX - 5].iter().cloned()));
         assert!(super::range_step_inclusive(200i128, -5, 1).eq(iter::empty()));
         assert!(super::range_step_inclusive(200i128, 200, 1).eq(iter::once(200)));
     }
