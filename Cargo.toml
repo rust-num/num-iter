@@ -11,6 +11,7 @@ name = "num-iter"
 version = "0.1.37"
 readme = "README.md"
 build = "build.rs"
+exclude = ["/ci/*", "/.travis.yml", "/bors.toml"]
 
 [package.metadata.docs.rs]
 features = ["std"]
