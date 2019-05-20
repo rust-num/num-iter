@@ -1,3 +1,9 @@
+# Release 0.1.38 (2019-05-20)
+
+- Maintenance update -- no functional changes.
+
+**Contributors**: @cuviper, @ignatenkobrain
+
 # Release 0.1.37 (2018-05-11)
 
 - [Support for 128-bit integers is now automatically detected and enabled.][5]
