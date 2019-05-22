@@ -1,3 +1,11 @@
+# Release 0.1.39 (2019-05-21)
+
+- [Fixed feature detection on `no_std` targets][11].
+
+**Contributors**: @cuviper
+
+[11]: https://github.com/rust-num/num-iter/pull/11
+
 # Release 0.1.38 (2019-05-20)
 
 - Maintenance update -- no functional changes.
