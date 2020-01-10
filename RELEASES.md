@@ -1,3 +1,11 @@
+# Release 0.1.40 (2020-01-09)
+
+- [Updated the `autocfg` build dependency to 1.0][14].
+
+**Contributors**: @cuviper, @dingelish
+
+[14]: https://github.com/rust-num/num-iter/pull/14
+
 # Release 0.1.39 (2019-05-21)
 
 - [Fixed feature detection on `no_std` targets][11].
