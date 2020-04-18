@@ -313,6 +313,42 @@ where
     }
 }
 
+#[derive(Clone)]
+pub struct RangeFrom<A> {
+    state: A,
+    one: A,
+}
+
+#[inline]
+pub fn range_from<A>(start: A) -> RangeFrom<A>
+where
+    A: Add<A, Output = A> + Clone + One,
+{
+    RangeFrom {
+        state: start,
+        one: One::one(),
+    }
+}
+
+impl<A> Iterator for RangeFrom<A>
+where
+    A: Add<A, Output = A> + Clone,
+{
+    type Item = A;
+
+    #[inline]
+    fn next(&mut self) -> Option<A> {
+        let result = self.state.clone();
+        self.state = self.state.clone() + self.one.clone();
+        Some(result)
+    }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (usize::MAX, None)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use core::cmp::Ordering;
