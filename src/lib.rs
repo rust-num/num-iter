@@ -570,4 +570,12 @@ mod tests {
         assert!(super::range_step_inclusive(200i128, -5, 1).eq(iter::empty()));
         assert!(super::range_step_inclusive(200i128, 200, 1).eq(iter::once(200)));
     }
+
+    #[test]
+    fn test_range_from() {
+        assert!(super::range_from(10u8)
+            .take(5)
+            .eq([10, 11, 12, 13, 14].iter().cloned()));
+        assert_eq!(super::range_from(10u8).size_hint(), (usize::MAX, None));
+    }
 }
