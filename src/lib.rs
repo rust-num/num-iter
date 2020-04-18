@@ -353,6 +353,46 @@ where
     }
 }
 
+/// An iterator over the infinite range starting at `start` by `step`
+#[derive(Clone)]
+pub struct RangeFromStep<A> {
+    state: A,
+    step: A,
+}
+
+/// Return an iterator over the infinite range starting at `start` and continuing forever by `step`.
+///
+/// *Note*: Currently, the `Iterator` implementation is not checked for overflow. If you use a finite-sized integer type and the integer overflows, it might panic in debug mode or wrap around in release mode. **This behavior is not guaranteed and may change at any time.**
+#[inline]
+pub fn range_from_step<A>(start: A, step: A) -> RangeFromStep<A>
+where
+    A: Add<A, Output = A> + Clone + One,
+{
+    RangeFromStep {
+        state: start,
+        step: step,
+    }
+}
+
+impl<A> Iterator for RangeFromStep<A>
+where
+    A: Add<A, Output = A> + Clone,
+{
+    type Item = A;
+
+    #[inline]
+    fn next(&mut self) -> Option<A> {
+        let result = self.state.clone();
+        self.state = self.state.clone() + self.step.clone();
+        Some(result)
+    }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (usize::MAX, None)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use core::cmp::Ordering;
@@ -581,5 +621,72 @@ mod tests {
             .take(5)
             .eq([10, 11, 12, 13, 14].iter().cloned()));
         assert_eq!(super::range_from(10u8).size_hint(), (usize::MAX, None));
+    }
+
+    #[test]
+    fn test_range_from_step() {
+        assert!(super::range_from_step(10u8, 2u8)
+            .take(5)
+            .eq([10, 12, 14, 16, 18].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10u8, 2u8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10u8, 1u8)
+            .take(5)
+            .eq([10, 11, 12, 13, 14].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10u8, 1u8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10u8, 0u8)
+            .take(5)
+            .eq([10, 10, 10, 10, 10].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10u8, 0u8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10i8, 2i8)
+            .take(5)
+            .eq([10, 12, 14, 16, 18].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10i8, 2i8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10i8, 1i8)
+            .take(5)
+            .eq([10, 11, 12, 13, 14].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10i8, 1i8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10i8, 0i8)
+            .take(5)
+            .eq([10, 10, 10, 10, 10].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10i8, 0i8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10i8, -1i8)
+            .take(5)
+            .eq([10, 9, 8, 7, 6].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10i8, -1i8).size_hint(),
+            (usize::MAX, None)
+        );
+
+        assert!(super::range_from_step(10i8, -2i8)
+            .take(5)
+            .eq([10, 8, 6, 4, 2].iter().cloned()));
+        assert_eq!(
+            super::range_from_step(10i8, -2i8).size_hint(),
+            (usize::MAX, None)
+        );
     }
 }
