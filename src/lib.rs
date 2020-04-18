@@ -313,12 +313,16 @@ where
     }
 }
 
+/// An iterator over the infinite range starting at `start`
 #[derive(Clone)]
 pub struct RangeFrom<A> {
     state: A,
     one: A,
 }
 
+/// Return an iterator over the infinite range starting at `start` and continuing forever.
+///
+/// *Note*: Currently, the `Iterator` implementation is not checked for overflow. If you use a finite-sized integer type and the integer overflows, it might panic in debug mode or wrap around in release mode. **This behavior is not guaranteed and may change at any time.**
 #[inline]
 pub fn range_from<A>(start: A) -> RangeFrom<A>
 where
