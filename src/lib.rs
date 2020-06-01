@@ -355,7 +355,7 @@ where
 
 /// An iterator over the infinite range starting at `start` by `step`
 #[derive(Clone)]
-pub struct RangeFromStep<A> {
+pub struct RangeStepFrom<A> {
     state: A,
     step: A,
 }
@@ -364,17 +364,17 @@ pub struct RangeFromStep<A> {
 ///
 /// *Note*: Currently, the `Iterator` implementation is not checked for overflow. If you use a finite-sized integer type and the integer overflows, it might panic in debug mode or wrap around in release mode. **This behavior is not guaranteed and may change at any time.**
 #[inline]
-pub fn range_from_step<A>(start: A, step: A) -> RangeFromStep<A>
+pub fn range_from_step<A>(start: A, step: A) -> RangeStepFrom<A>
 where
     A: Add<A, Output = A> + Clone + One,
 {
-    RangeFromStep {
+    RangeStepFrom {
         state: start,
         step: step,
     }
 }
 
-impl<A> Iterator for RangeFromStep<A>
+impl<A> Iterator for RangeStepFrom<A>
 where
     A: Add<A, Output = A> + Clone,
 {
