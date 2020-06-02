@@ -322,7 +322,10 @@ pub struct RangeFrom<A> {
 
 /// Return an iterator over the infinite range starting at `start` and continuing forever.
 ///
-/// *Note*: Currently, the `Iterator` implementation is not checked for overflow. If you use a finite-sized integer type and the integer overflows, it might panic in debug mode or wrap around in release mode. **This behavior is not guaranteed and may change at any time.**
+/// *Note*: Currently, the `Iterator` implementation is not checked for overflow.
+/// If you use a finite-sized integer type and the integer overflows,
+/// it might panic in debug mode or wrap around in release mode.
+/// **This behavior is not guaranteed and may change at any time.**
 #[inline]
 pub fn range_from<A>(start: A) -> RangeFrom<A>
 where
@@ -362,11 +365,14 @@ pub struct RangeStepFrom<A> {
 
 /// Return an iterator over the infinite range starting at `start` and continuing forever by `step`.
 ///
-/// *Note*: Currently, the `Iterator` implementation is not checked for overflow. If you use a finite-sized integer type and the integer overflows, it might panic in debug mode or wrap around in release mode. **This behavior is not guaranteed and may change at any time.**
+/// *Note*: Currently, the `Iterator` implementation is not checked for overflow.
+/// If you use a finite-sized integer type and the integer overflows,
+/// it might panic in debug mode or wrap around in release mode.
+/// **This behavior is not guaranteed and may change at any time.**
 #[inline]
 pub fn range_step_from<A>(start: A, step: A) -> RangeStepFrom<A>
 where
-    A: Add<A, Output = A> + Clone + One,
+    A: Add<A, Output = A> + Clone,
 {
     RangeStepFrom {
         state: start,
