@@ -1,3 +1,12 @@
+# Release 0.1.41 (2020-06-11)
+
+- [The new `RangeFrom` and `RangeFromStep` iterators][18] will count from a
+  given starting value, without any terminating value.
+
+**Contributors**: @cuviper, @sollyucko
+
+[18]: https://github.com/rust-num/num-iter/pull/18
+
 # Release 0.1.40 (2020-01-09)
 
 - [Updated the `autocfg` build dependency to 1.0][14].
