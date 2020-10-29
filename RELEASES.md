@@ -1,3 +1,13 @@
+# Release 0.1.42 (2020-10-29)
+
+- [The "i128" feature now bypasses compiler probing][20]. The build script
+  used to probe anyway and panic if requested support wasn't found, but
+  sometimes this ran into bad corner cases with `autocfg`.
+
+**Contributors**: @cuviper
+
+[20]: https://github.com/rust-num/num-iter/pull/20
+
 # Release 0.1.41 (2020-06-11)
 
 - [The new `RangeFrom` and `RangeFromStep` iterators][18] will count from a
