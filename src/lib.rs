@@ -22,7 +22,7 @@ extern crate std;
 extern crate num_integer as integer;
 extern crate num_traits as traits;
 
-use core::ops::{Add, Sub};
+use core::ops::{Add, Bound, RangeBounds, Sub};
 use core::usize;
 use integer::Integer;
 use traits::{CheckedAdd, One, ToPrimitive, Zero};
@@ -81,6 +81,16 @@ fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
             None => None,
         },
         Some(u) => Some(u),
+    }
+}
+
+impl<A> RangeBounds<A> for Range<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Excluded(&self.stop)
     }
 }
 
@@ -163,6 +173,16 @@ where
     }
 }
 
+impl<A> RangeBounds<A> for RangeInclusive<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.range.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.range.stop)
+    }
+}
+
 impl<A> Iterator for RangeInclusive<A>
 where
     A: Add<A, Output = A> + PartialOrd + Clone + ToPrimitive,
@@ -180,7 +200,7 @@ where
                 } else {
                     None
                 }
-            }
+            },
         }
     }
 
@@ -226,6 +246,16 @@ pub struct RangeStep<A> {
     stop: A,
     step: A,
     rev: bool,
+}
+
+impl<A> RangeBounds<A> for RangeStep<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Excluded(&self.stop)
+    }
 }
 
 /// Return an iterator over the range [start, stop) by `step`. It handles overflow by stopping.
@@ -290,6 +320,16 @@ where
     }
 }
 
+impl<A> RangeBounds<A> for RangeStepInclusive<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.stop)
+    }
+}
+
 impl<A> Iterator for RangeStepInclusive<A>
 where
     A: CheckedAdd + PartialOrd + Clone + PartialEq,
@@ -337,6 +377,16 @@ where
     }
 }
 
+impl<A> RangeBounds<A> for RangeFrom<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Unbounded
+    }
+}
+
 impl<A> Iterator for RangeFrom<A>
 where
     A: Add<A, Output = A> + Clone,
@@ -377,6 +427,16 @@ where
     RangeStepFrom {
         state: start,
         step: step,
+    }
+}
+
+impl<A> RangeBounds<A> for RangeStepFrom<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Unbounded
     }
 }
 
