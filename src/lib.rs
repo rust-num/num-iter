@@ -84,6 +84,7 @@ fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
     }
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for Range<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -173,6 +174,7 @@ where
     }
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeInclusive<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.range.state)
@@ -248,6 +250,7 @@ pub struct RangeStep<A> {
     rev: bool,
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeStep<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -320,6 +323,7 @@ where
     }
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeStepInclusive<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -377,6 +381,7 @@ where
     }
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeFrom<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -430,6 +435,7 @@ where
     }
 }
 
+#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeStepFrom<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
