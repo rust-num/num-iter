@@ -205,7 +205,7 @@ where
                 } else {
                     None
                 }
-            },
+            }
         }
     }
 
