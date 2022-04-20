@@ -22,10 +22,13 @@ extern crate std;
 extern crate num_integer as integer;
 extern crate num_traits as traits;
 
-use core::ops::{Add, Bound, RangeBounds, Sub};
+use core::ops::{Add, Sub};
 use core::usize;
 use integer::Integer;
 use traits::{CheckedAdd, One, ToPrimitive, Zero};
+
+#[cfg(rustc_1_28)]
+use core::ops::{Bound, RangeBounds};
 
 /// An iterator over the range [start, stop)
 #[derive(Clone)]
@@ -250,17 +253,6 @@ pub struct RangeStep<A> {
     rev: bool,
 }
 
-#[cfg(rustc_1_28)]
-impl<A> RangeBounds<A> for RangeStep<A> {
-    fn start_bound(&self) -> Bound<&A> {
-        Bound::Included(&self.state)
-    }
-
-    fn end_bound(&self) -> Bound<&A> {
-        Bound::Excluded(&self.stop)
-    }
-}
-
 /// Return an iterator over the range [start, stop) by `step`. It handles overflow by stopping.
 #[inline]
 pub fn range_step<A>(start: A, stop: A, step: A) -> RangeStep<A>
@@ -320,17 +312,6 @@ where
         step: step,
         rev: rev,
         done: false,
-    }
-}
-
-#[cfg(rustc_1_28)]
-impl<A> RangeBounds<A> for RangeStepInclusive<A> {
-    fn start_bound(&self) -> Bound<&A> {
-        Bound::Included(&self.state)
-    }
-
-    fn end_bound(&self) -> Bound<&A> {
-        Bound::Included(&self.stop)
     }
 }
 
@@ -432,17 +413,6 @@ where
     RangeStepFrom {
         state: start,
         step: step,
-    }
-}
-
-#[cfg(rustc_1_28)]
-impl<A> RangeBounds<A> for RangeStepFrom<A> {
-    fn start_bound(&self) -> Bound<&A> {
-        Bound::Included(&self.state)
-    }
-
-    fn end_bound(&self) -> Bound<&A> {
-        Bound::Unbounded
     }
 }
 
