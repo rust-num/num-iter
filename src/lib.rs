@@ -27,6 +27,9 @@ use core::usize;
 use integer::Integer;
 use traits::{CheckedAdd, One, ToPrimitive, Zero};
 
+#[cfg(rustc_1_28)]
+use core::ops::{Bound, RangeBounds};
+
 /// An iterator over the range [start, stop)
 #[derive(Clone)]
 pub struct Range<A> {
@@ -81,6 +84,17 @@ fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
             None => None,
         },
         Some(u) => Some(u),
+    }
+}
+
+#[cfg(rustc_1_28)]
+impl<A> RangeBounds<A> for Range<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Excluded(&self.stop)
     }
 }
 
@@ -160,6 +174,17 @@ where
     RangeInclusive {
         range: range(start, stop),
         done: false,
+    }
+}
+
+#[cfg(rustc_1_28)]
+impl<A> RangeBounds<A> for RangeInclusive<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.range.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.range.stop)
     }
 }
 
@@ -334,6 +359,17 @@ where
     RangeFrom {
         state: start,
         one: One::one(),
+    }
+}
+
+#[cfg(rustc_1_28)]
+impl<A> RangeBounds<A> for RangeFrom<A> {
+    fn start_bound(&self) -> Bound<&A> {
+        Bound::Included(&self.state)
+    }
+
+    fn end_bound(&self) -> Bound<&A> {
+        Bound::Unbounded
     }
 }
 

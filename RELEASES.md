@@ -1,3 +1,12 @@
+# Release 0.1.43 (2022-04-26)
+
+- [`Range`, `RangeInclusive`, and `RangeFrom` now implement `RangeBounds`][21]
+  from Rust 1.28 and later.
+
+**Contributors**: @chrismit3s, @cuviper
+
+[21]: https://github.com/rust-num/num-iter/pull/21
+
 # Release 0.1.42 (2020-10-29)
 
 - [The "i128" feature now bypasses compiler probing][20]. The build script
