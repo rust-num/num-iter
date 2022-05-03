@@ -24,11 +24,8 @@ extern crate num_traits as traits;
 
 use crate::integer::Integer;
 use crate::traits::{CheckedAdd, One, ToPrimitive, Zero};
-use core::ops::{Add, Sub};
+use core::ops::{Add, Bound, RangeBounds, Sub};
 use core::usize;
-
-#[cfg(rustc_1_28)]
-use core::ops::{Bound, RangeBounds};
 
 /// An iterator over the range [start, stop)
 #[derive(Clone)]
@@ -74,7 +71,6 @@ fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
     }
 }
 
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for Range<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -164,7 +160,6 @@ where
     }
 }
 
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeInclusive<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.range.state)
@@ -349,7 +344,6 @@ where
     }
 }
 
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeFrom<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
