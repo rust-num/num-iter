@@ -2,7 +2,7 @@
 
 [![crate](https://img.shields.io/crates/v/num-iter.svg)](https://crates.io/crates/num-iter)
 [![documentation](https://docs.rs/num-iter/badge.svg)](https://docs.rs/num-iter)
-[![minimum rustc 1.8](https://img.shields.io/badge/rustc-1.8+-red.svg)](https://rust-lang.github.io/rfcs/2495-min-rust-version.html)
+[![minimum rustc 1.31](https://img.shields.io/badge/rustc-1.31+-red.svg)](https://rust-lang.github.io/rfcs/2495-min-rust-version.html)
 [![build status](https://github.com/rust-num/num-iter/workflows/master/badge.svg)](https://github.com/rust-num/num-iter/actions)
 
 Generic `Range` iterators for Rust.
@@ -46,7 +46,7 @@ Release notes are available in [RELEASES.md](RELEASES.md).
 
 ## Compatibility
 
-The `num-iter` crate is tested for rustc 1.8 and greater.
+The `num-iter` crate is tested for rustc 1.31 and greater.
 
 ## License
 
