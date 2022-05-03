@@ -22,10 +22,10 @@ extern crate std;
 extern crate num_integer as integer;
 extern crate num_traits as traits;
 
+use crate::integer::Integer;
+use crate::traits::{CheckedAdd, One, ToPrimitive, Zero};
 use core::ops::{Add, Sub};
 use core::usize;
-use integer::Integer;
-use traits::{CheckedAdd, One, ToPrimitive, Zero};
 
 #[cfg(rustc_1_28)]
 use core::ops::{Bound, RangeBounds};
@@ -437,11 +437,11 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::traits::{One, ToPrimitive};
     use core::cmp::Ordering;
     use core::iter;
     use core::ops::{Add, Mul};
     use core::{isize, usize};
-    use traits::{One, ToPrimitive};
 
     #[test]
     fn test_range() {
