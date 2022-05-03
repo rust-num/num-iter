@@ -16,16 +16,11 @@
 
 #![doc(html_root_url = "https://docs.rs/num-iter/0.1")]
 #![no_std]
-#[cfg(feature = "std")]
-extern crate std;
 
-extern crate num_integer as integer;
-extern crate num_traits as traits;
-
-use crate::integer::Integer;
-use crate::traits::{CheckedAdd, One, ToPrimitive, Zero};
 use core::ops::{Add, Bound, RangeBounds, Sub};
 use core::usize;
+use num_integer::Integer;
+use num_traits::{CheckedAdd, One, ToPrimitive, Zero};
 
 /// An iterator over the range [start, stop)
 #[derive(Clone)]
@@ -418,11 +413,11 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::traits::{One, ToPrimitive};
     use core::cmp::Ordering;
     use core::iter;
     use core::ops::{Add, Mul};
     use core::{isize, usize};
+    use num_traits::{One, ToPrimitive};
 
     #[test]
     fn test_range() {

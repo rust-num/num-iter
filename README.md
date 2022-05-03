@@ -16,12 +16,6 @@ Add this to your `Cargo.toml`:
 num-iter = "0.1"
 ```
 
-and this to your crate root:
-
-```rust
-extern crate num_iter;
-```
-
 ## Features
 
 This crate can be used without the standard library (`#![no_std]`) by disabling
