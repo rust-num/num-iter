@@ -58,11 +58,8 @@ where
 #[inline]
 fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
     match x.to_u128() {
-        None => match x.to_i128() {
-            Some(i) => Some(i as u128),
-            None => None,
-        },
         Some(u) => Some(u),
+        None => Some(x.to_i128()? as u128),
     }
 }
 
