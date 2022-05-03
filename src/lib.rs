@@ -50,7 +50,7 @@ where
 {
     Range {
         state: start,
-        stop: stop,
+        stop,
         one: One::one(),
     }
 }
@@ -239,9 +239,9 @@ where
     let rev = step < Zero::zero();
     RangeStep {
         state: start,
-        stop: stop,
-        step: step,
-        rev: rev,
+        stop,
+        step,
+        rev,
     }
 }
 
@@ -285,9 +285,9 @@ where
     let rev = step < Zero::zero();
     RangeStepInclusive {
         state: start,
-        stop: stop,
-        step: step,
-        rev: rev,
+        stop,
+        step,
+        rev,
         done: false,
     }
 }
@@ -386,10 +386,7 @@ pub fn range_step_from<A>(start: A, step: A) -> RangeStepFrom<A>
 where
     A: Add<A, Output = A> + Clone,
 {
-    RangeStepFrom {
-        state: start,
-        step: step,
-    }
+    RangeStepFrom { state: start, step }
 }
 
 impl<A> Iterator for RangeStepFrom<A>
