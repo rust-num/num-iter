@@ -64,23 +64,10 @@ where
 }
 
 #[inline]
-#[cfg(has_i128)]
 fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
     match x.to_u128() {
         None => match x.to_i128() {
             Some(i) => Some(i as u128),
-            None => None,
-        },
-        Some(u) => Some(u),
-    }
-}
-
-#[inline]
-#[cfg(not(has_i128))]
-fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
-    match x.to_u64() {
-        None => match x.to_i64() {
-            Some(i) => Some(i as u64),
             None => None,
         },
         Some(u) => Some(u),
@@ -519,7 +506,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_128() {
         use core::{i128, u128};
 
@@ -578,7 +564,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_inclusive_128() {
         use core::i128;
 
@@ -621,7 +606,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_step_128() {
         use core::u128::MAX as UMAX;
 
@@ -644,7 +628,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_step_inclusive_128() {
         use core::u128::MAX as UMAX;
 

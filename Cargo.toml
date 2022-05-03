@@ -23,15 +23,19 @@ features = ["std"]
 [dependencies.num-integer]
 version = "0.1.42"
 default-features = false
+features = ["i128"]
 
 [dependencies.num-traits]
 version = "0.2.11"
 default-features = false
+features = ["i128"]
 
 [features]
 default = ["std"]
-i128 = ["num-integer/i128", "num-traits/i128"]
 std = ["num-integer/std", "num-traits/std"]
+
+# vestigial features, now always in effect
+i128 = []
 
 [build-dependencies]
 autocfg = "1"
