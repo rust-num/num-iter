@@ -12,23 +12,15 @@
 //!
 //! ## Compatibility
 //!
-//! The `num-iter` crate is tested for rustc 1.8 and greater.
+//! The `num-iter` crate is tested for rustc 1.31 and greater.
 
 #![doc(html_root_url = "https://docs.rs/num-iter/0.1")]
 #![no_std]
-#[cfg(feature = "std")]
-extern crate std;
 
-extern crate num_integer as integer;
-extern crate num_traits as traits;
-
-use core::ops::{Add, Sub};
+use core::ops::{Add, Bound, RangeBounds, Sub};
 use core::usize;
-use integer::Integer;
-use traits::{CheckedAdd, One, ToPrimitive, Zero};
-
-#[cfg(rustc_1_28)]
-use core::ops::{Bound, RangeBounds};
+use num_integer::Integer;
+use num_traits::{CheckedAdd, One, ToPrimitive, Zero};
 
 /// An iterator over the range [start, stop)
 #[derive(Clone)]
@@ -58,36 +50,19 @@ where
 {
     Range {
         state: start,
-        stop: stop,
+        stop,
         one: One::one(),
     }
 }
 
 #[inline]
-#[cfg(has_i128)]
 fn unsigned<T: ToPrimitive>(x: &T) -> Option<u128> {
     match x.to_u128() {
-        None => match x.to_i128() {
-            Some(i) => Some(i as u128),
-            None => None,
-        },
         Some(u) => Some(u),
+        None => Some(x.to_i128()? as u128),
     }
 }
 
-#[inline]
-#[cfg(not(has_i128))]
-fn unsigned<T: ToPrimitive>(x: &T) -> Option<u64> {
-    match x.to_u64() {
-        None => match x.to_i64() {
-            Some(i) => Some(i as u64),
-            None => None,
-        },
-        Some(u) => Some(u),
-    }
-}
-
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for Range<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -177,7 +152,6 @@ where
     }
 }
 
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeInclusive<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.range.state)
@@ -262,9 +236,9 @@ where
     let rev = step < Zero::zero();
     RangeStep {
         state: start,
-        stop: stop,
-        step: step,
-        rev: rev,
+        stop,
+        step,
+        rev,
     }
 }
 
@@ -308,9 +282,9 @@ where
     let rev = step < Zero::zero();
     RangeStepInclusive {
         state: start,
-        stop: stop,
-        step: step,
-        rev: rev,
+        stop,
+        step,
+        rev,
         done: false,
     }
 }
@@ -362,7 +336,6 @@ where
     }
 }
 
-#[cfg(rustc_1_28)]
 impl<A> RangeBounds<A> for RangeFrom<A> {
     fn start_bound(&self) -> Bound<&A> {
         Bound::Included(&self.state)
@@ -410,10 +383,7 @@ pub fn range_step_from<A>(start: A, step: A) -> RangeStepFrom<A>
 where
     A: Add<A, Output = A> + Clone,
 {
-    RangeStepFrom {
-        state: start,
-        step: step,
-    }
+    RangeStepFrom { state: start, step }
 }
 
 impl<A> Iterator for RangeStepFrom<A>
@@ -441,7 +411,7 @@ mod tests {
     use core::iter;
     use core::ops::{Add, Mul};
     use core::{isize, usize};
-    use traits::{One, ToPrimitive};
+    use num_traits::{One, ToPrimitive};
 
     #[test]
     fn test_range() {
@@ -519,7 +489,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_128() {
         use core::{i128, u128};
 
@@ -578,7 +547,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_inclusive_128() {
         use core::i128;
 
@@ -621,7 +589,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_step_128() {
         use core::u128::MAX as UMAX;
 
@@ -644,7 +611,6 @@ mod tests {
     }
 
     #[test]
-    #[cfg(has_i128)]
     fn test_range_step_inclusive_128() {
         use core::u128::MAX as UMAX;
 
