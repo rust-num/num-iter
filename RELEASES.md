@@ -1,3 +1,11 @@
+# Release 0.1.44 (2024-02-07)
+
+- [Upgrade to 2018 edition, **MSRV 1.31**][22]
+
+**Contributors**: @cuviper
+
+[22]: https://github.com/rust-num/num-iter/pull/22
+
 # Release 0.1.43 (2022-04-26)
 
 - [`Range`, `RangeInclusive`, and `RangeFrom` now implement `RangeBounds`][21]
