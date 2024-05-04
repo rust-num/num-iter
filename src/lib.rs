@@ -125,7 +125,7 @@ where
     #[inline]
     fn next_back(&mut self) -> Option<A> {
         if self.stop > self.state {
-            self.stop = self.stop.clone() - self.one.clone();
+            self.stop.dec();
             Some(self.stop.clone())
         } else {
             None
@@ -207,7 +207,7 @@ where
     fn next_back(&mut self) -> Option<A> {
         if self.range.stop > self.range.state {
             let result = self.range.stop.clone();
-            self.range.stop = self.range.stop.clone() - self.range.one.clone();
+            self.range.stop.dec();
             Some(result)
         } else if !self.done && self.range.state == self.range.stop {
             self.done = true;
