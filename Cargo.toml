@@ -35,6 +35,3 @@ std = ["num-integer/std", "num-traits/std"]
 
 # vestigial features, now always in effect
 i128 = []
-
-[build-dependencies]
-autocfg = "1"
